@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flipbook (StPageFlip) – Ejemplo</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/page-flip@2.4.1/dist/css/page-flip.css">
+  <style>
+    html, body { height: 100%; margin: 0; background: #111; color: #fff; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, sans-serif; }
+    .wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; height: 100%; padding: 16px; box-sizing: border-box; }
+    #flipbook { box-shadow: 0 10px 40px rgba(0,0,0,0.5); border-radius: 12px; overflow: hidden; background: #222; }
+    .controls { display: flex; gap: 8px; align-items: center; justify-content: center; flex-wrap: wrap; }
+    button { cursor: pointer; border: none; padding: 10px 16px; border-radius: 8px; background: #2d6cdf; color: white; font-weight: 600; }
+    button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .note { font-size: 14px; opacity: 0.8; text-align: center; }
+    @media (max-width: 1500px) { #flipbook { transform-origin: top center; transform: scale(0.6); } }
+    @media (max-width: 1100px) { #flipbook { transform: scale(0.45); } }
+    @media (max-width: 800px) { #flipbook { transform: scale(0.35); } }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div id="flipbook"></div>
+    <div class="controls">
+      <button id="prevBtn">⟵ Anterior</button>
+      <button id="nextBtn">Siguiente ⟶</button>
+      <button id="zoomInBtn">Zoom +</button>
+      <button id="zoomOutBtn">Zoom −</button>
+      <span class="note" id="pageInfo">Página 1 de 4</span>
+    </div>
+    <div class="note">Reemplazá los archivos en <code>img/</code> por tus imágenes de 1398×2000 px y agregá más en <code>index.html</code> si necesitás.</div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/page-flip@2.4.1/dist/js/page-flip.browser.min.js"></script>
+  <script>
+    const W = 1398;
+    const H = 2000;
+    const flip = new St.PageFlip(document.getElementById('flipbook'), {
+      width: W,
+      height: H,
+      size: 'fixed',
+      maxShadowOpacity: 0.5,
+      showCover: true,
+      useMouseEvents: true,
+      usePortrait: false,
+      mobileScrollSupport: true
+    });
+    flip.loadFromImages([
+      'img/pagina 1.jpg',
+      'img/pagina 2.jpg',
+      'img/pagina 3.jpg',
+      'img/pagina 4.jpg',
+	  'img/pagina 5.jpg',
+	  'img/pagina 6.jpg',
+	  'img/pagina 7.jpg',
+	  'img/pagina 8.jpg',
+	  'img/pagina 9.jpg',
+	  'img/pagina 10.jpg',
+	  'img/pagina 11.jpg',
+	  'img/pagina 12.jpg',
+	  'img/pagina 13.jpg',
+	  'img/pagina 14.jpg',
+	  'img/pagina 15.jpg',
+	  'img/pagina 16.jpg'
+    ]);
+    const prev = document.getElementById('prevBtn');
+    const next = document.getElementById('nextBtn');
+    const zoomIn = document.getElementById('zoomInBtn');
+    const zoomOut = document.getElementById('zoomOutBtn');
+    const pageInfo = document.getElementById('pageInfo');
+    prev.addEventListener('click', () => flip.flipPrev());
+    next.addEventListener('click', () => flip.flipNext());
+    let scale = 1;
+    function applyScale() {
+      document.getElementById('flipbook').style.transform = `scale(${scale})`;
+      document.getElementById('flipbook').style.transformOrigin = 'top center';
+    }
+    zoomIn.addEventListener('click', () => { scale = Math.min(1.2, scale + 0.1); applyScale(); });
+    zoomOut.addEventListener('click', () => { scale = Math.max(0.3, scale - 0.1); applyScale(); });
+    flip.on('flip', (e) => {
+      pageInfo.textContent = `Página ${e.data + 1} de ${flip.getPageCount()}`;
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') flip.flipPrev();
+      if (e.key === 'ArrowRight') flip.flipNext();
+    });
+  </script>
+</body>
+</html>
