@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Flipbook 1 Página Fijo</title>
+  <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/css/page-flip.css">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #333;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* 🔹 PC → tamaño real */
+    .flipbook-wrapper {
+      width: 908px;
+      height: 1298px;
+    }
+
+    #flipbook {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* 🔹 Celular → se adapta al ancho de pantalla */
+    @media (max-width: 950px) {
+      .flipbook-wrapper {
+        width: 95vw;
+        aspect-ratio: 908 / 1298;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="flipbook-wrapper">
+    <div id="flipbook"></div>
+  </div>
+
+  <script>
+    const flip = new St.PageFlip(
+      document.getElementById("flipbook"),
+      {
+        width: 908,
+        height: 1298,
+        size: "stretch",
+        autoCenter: true,
+        showCover: false,
+        usePortrait: true,
+        minWidth: 908,
+        maxWidth: 908,
+        minHeight: 400,
+        maxHeight: 1298,
+      }
+    );
+
+    flip.loadFromImages([
+      "img/page1.jpg",
+      "img/page2.jpg",
+      "img/page3.jpg",
+      "img/page4.jpg",
+	  "img/page5.jpg",
+      "img/page6.jpg",
+      "img/page7.jpg",
+      "img/page8.jpg",
+	  "img/page9.jpg",
+      "img/page10.jpg",
+      "img/page11.jpg",
+      "img/page12.jpg",
+	  "img/page13.jpg",
+      "img/page14.jpg",
+      "img/page15.jpg",
+      "img/page16.jpg",
+	  "img/page17.jpg",
+      "img/page18.jpg"
+    ]);
+  </script>
+</body>
+</html>
