@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Flipbook con StPageFlip</title>
+  <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/css/page-flip.css">
+  <style>
+    body {
+      margin: 0;
+      background: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    #flipbook {
+      width: 1398px;
+      height: 2000px;
+    }
+  </style>
+</head>
+<body>
+  <div id="flipbook"></div>
+
+  <script>
+    const flip = new St.PageFlip(
+      document.getElementById("flipbook"),
+      {
+        width: 1398,
+        height: 2000,
+        size: "fixed",
+        autoCenter: true,
+      }
+    );
+
+    flip.loadFromImages([
+      "img/page1.jpg",
+      "img/page2.jpg",
+      "img/page3.jpg",
+      "img/page4.jpg"
+    ]);
+  </script>
+</body>
+</html>
