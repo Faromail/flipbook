@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Flipbook con Índice en Imagen 2</title>
+  <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/css/page-flip.css">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #333;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .flipbook-wrapper {
+      position: relative;
+      width: 908px;
+      height: 1298px;
+    }
+
+    #flipbook {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* 🔹 Botón flotante centrado abajo */
+    .boton-indice {
+      position: absolute;
+      bottom: 20px; /* separación desde abajo */
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 20px;
+      background: rgba(0,0,0,0.6);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      z-index: 10;
+    }
+
+    .boton-indice:hover {
+      background: rgba(0,0,0,0.8);
+    }
+
+    /* 🔹 Capa invisible para los links del índice */
+    .indice-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none; /* No molesta salvo en los botones */
+      display: none; /* Oculto por defecto */
+    }
+
+    .indice-overlay button {
+      position: absolute;
+      background: rgba(255,255,255,0.05); /* casi invisible */
+      border: none;
+      cursor: pointer;
+      pointer-events: auto;
+    }
+
+    .indice-overlay button:hover {
+      background: rgba(255,255,255,0.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="flipbook-wrapper">
+    <div id="flipbook"></div>
+
+    <!-- 🔹 Botón flotante para volver al índice -->
+    <button class="boton-indice" onclick="irAPagina(9)">📖 Ir al índice</button>
+
+    <!-- 🔹 Capa de índice encima de la página 2 -->
+    <div class="indice-overlay" id="indiceOverlay">
+      <button style="top:270px; left:100px; width:300px; height:20px;" onclick="irAPagina(11)"></button>
+      <button style="top:310px; left:100px; width:300px; height:20px;" onclick="irAPagina(12)"></button>
+      <button style="top:350px; left:100px; width:300px; height:20px;" onclick="irAPagina(13)"></button>
+	  <button style="top:390px; left:100px; width:300px; height:20px;" onclick="irAPagina(14)"></button>
+	  <button style="top:430px; left:100px; width:300px; height:20px;" onclick="irAPagina(15)"></button>
+	  <button style="top:470px; left:100px; width:300px; height:20px;" onclick="irAPagina(15)"></button>
+	  <button style="top:510px; left:100px; width:300px; height:20px;" onclick="irAPagina(16)"></button>	  
+	  <button style="top:550px; left:100px; width:300px; height:20px;" onclick="irAPagina(16)"></button>
+	  <button style="top:590px; left:100px; width:300px; height:20px;" onclick="irAPagina(19)"></button>
+	  <button style="top:630px; left:100px; width:300px; height:20px;" onclick="irAPagina(19)"></button>
+	  <button style="top:670px; left:100px; width:300px; height:20px;" onclick="irAPagina(20)"></button>
+	  <button style="top:710px; left:100px; width:300px; height:20px;" onclick="irAPagina(21)"></button>
+	  <button style="top:750px; left:100px; width:300px; height:20px;" onclick="irAPagina(23)"></button>
+	  <button style="top:790px; left:100px; width:300px; height:20px;" onclick="irAPagina(22)"></button>
+	  <button style="top:830px; left:100px; width:300px; height:20px;" onclick="irAPagina(24)"></button>
+	  <button style="top:870px; left:100px; width:300px; height:20px;" onclick="irAPagina(24)"></button>
+	  <button style="top:910px; left:100px; width:300px; height:20px;" onclick="irAPagina(25)"></button>
+	  <button style="top:950px; left:100px; width:300px; height:20px;" onclick="irAPagina(20)"></button>
+	  <button style="top:990px; left:100px; width:300px; height:20px;" onclick="irAPagina(22)"></button>
+	  <button style="top:1030px; left:100px; width:300px; height:20px;" onclick="irAPagina(26)"></button>
+	  <button style="top:1070px; left:100px; width:300px; height:20px;" onclick="irAPagina(27)"></button>
+	  <button style="top:1110px; left:100px; width:300px; height:20px;" onclick="irAPagina(28)"></button>
+	  <button style="top:1150px; left:100px; width:300px; height:20px;" onclick="irAPagina(28)"></button>
+	  <button style="top:1190px; left:100px; width:300px; height:20px;" onclick="irAPagina(10)"></button>
+	  	  
+	  <button style="top:310px; left:550px; width:300px; height:20px;" onclick="irAPagina(29)"></button>
+	  <button style="top:350px; left:550px; width:300px; height:20px;" onclick="irAPagina(29)"></button>
+	  <button style="top:390px; left:550px; width:300px; height:20px;" onclick="irAPagina(30)"></button>
+	  <button style="top:430px; left:550px; width:300px; height:20px;" onclick="irAPagina(30)"></button>
+	  <button style="top:470px; left:550px; width:300px; height:20px;" onclick="irAPagina(31)"></button>
+	  <button style="top:510px; left:550px; width:300px; height:20px;" onclick="irAPagina(31)"></button>
+	  <button style="top:550px; left:550px; width:300px; height:20px;" onclick="irAPagina(32)"></button>
+	  <button style="top:590px; left:550px; width:300px; height:20px;" onclick="irAPagina(32)"></button>
+	  <button style="top:630px; left:550px; width:300px; height:20px;" onclick="irAPagina(33)"></button>
+	  <button style="top:670px; left:550px; width:300px; height:20px;" onclick="irAPagina(33)"></button>
+	  <button style="top:830px; left:550px; width:300px; height:20px;" onclick="irAPagina(17)"></button>
+	  <button style="top:880px; left:550px; width:300px; height:20px;" onclick="irAPagina(18)"></button>
+	  <button style="top:930px; left:550px; width:300px; height:20px;" onclick="irAPagina(13)"></button>
+	  <button style="top:970px; left:550px; width:300px; height:20px;" onclick="irAPagina(18)"></button>
+	  	  
+    </div>
+  </div>
+
+  <script>
+    const flip = new St.PageFlip(
+      document.getElementById("flipbook"),
+      {
+        width: 908,
+        height: 1298,
+        size: "stretch",
+        autoCenter: true,
+        showCover: false,
+        usePortrait: true,
+        minWidth: 908,
+        maxWidth: 908,
+        minHeight: 400,
+        maxHeight: 1298,
+      }
+    );
+
+    const paginas = [
+      "img/1.jpg","img/2.jpg","img/3.jpg","img/4.jpg","img/5.jpg",
+      "img/6.jpg","img/7.jpg","img/8.jpg","img/9.jpg","img/10.jpg",
+      "img/11.jpg","img/12.jpg","img/13.jpg","img/14.jpg","img/15.jpg",
+      "img/16.jpg","img/17.jpg","img/18.jpg","img/19.jpg","img/20.jpg",
+      "img/21.jpg","img/22.jpg","img/23.jpg","img/24.jpg","img/25.jpg",
+	  "img/26.jpg","img/27.jpg","img/28.jpg","img/29.jpg","img/30.jpg",
+	  "img/31.jpg","img/32.jpg","img/33.jpg","img/34.jpg","img/35.jpg","img/36.jpg"
+    ];
+
+    flip.loadFromImages(paginas);
+
+    // 🔹 Mostrar/ocultar la capa solo en la página 9
+    flip.on("flip", (e) => {
+      const overlay = document.getElementById("indiceOverlay");
+      if (e.data === 8) { // página 9 = índice (arranca en 0)
+        overlay.style.display = "block";
+      } else {
+        overlay.style.display = "none";
+      }
+    });
+
+    // Función para ir a una página
+    function irAPagina(num) {
+      flip.turnToPage(num - 1);
+    }
+  </script>
+</body>
+</html>
